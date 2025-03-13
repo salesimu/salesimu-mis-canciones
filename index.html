@@ -19,7 +19,7 @@
             padding: 20px;
             border-radius: 10px;
         }
-        iframe, audio {
+        audio {
             width: 100%;
             max-width: 600px;
         }
@@ -35,7 +35,10 @@
     <div class="player-container">
         <h1>Reproductor</h1>
         <p>Reproduciendo tu canción...</p>
-        <div id="player"></div>
+        <audio id="audioPlayer" controls autoplay>
+            <source id="audioSource" src="" type="audio/mp3">
+            Tu navegador no soporta el reproductor de audio.
+        </audio>
         <a href="index.html">Volver a la lista</a>
     </div>
 
@@ -46,11 +49,10 @@
 
         // Check if the URL is valid
         if (songUrl) {
-            document.getElementById('player').innerHTML = `
-                <iframe src="${songUrl}?autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
-            `;
+            document.getElementById('audioSource').src = songUrl;
+            document.getElementById('audioPlayer').load();
         } else {
-            document.getElementById('player').innerHTML = "<p>Error: No se encontró la canción.</p>";
+            document.querySelector('.player-container').innerHTML = "<p>Error: No se encontró la canción.</p>";
         }
     </script>
 </body>
